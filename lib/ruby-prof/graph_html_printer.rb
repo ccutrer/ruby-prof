@@ -106,15 +106,15 @@ module RubyProf
     def create_link(thread_id, method)
       if self.total_percent(thread_id, method) < min_percent
         # Just return name
-        h method.full_name
+        h(method.full_name) rescue 'Unknown'
       else
         href = '#' + method_href(thread_id, method)
-        "<a href=\"#{href}\">#{h method.full_name}</a>"
+        "<a href=\"#{href}\">#{h(method.full_name) rescue 'Unknown'}</a>"
       end
     end
 
     def method_href(thread_id, method)
-      h(method.full_name.gsub(/[><#\.\?=:]/,"_") + "_" + thread_id.to_s)
+      h((method.full_name rescue 'Unknown').gsub(/[><#\.\?=:]/,"_") + "_" + thread_id.to_s)
     end
 
     def file_link(path, linenum)

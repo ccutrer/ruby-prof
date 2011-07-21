@@ -12,7 +12,7 @@ module RubyProf
       elsif self.min_depth > other.min_depth
         -1
       else
-        -1 * (self.full_name <=> other.full_name)
+        -1 * ((self.full_name rescue 'Unknown') <=> (other.full_name rescue 'Unknown'))
       end
     end
 

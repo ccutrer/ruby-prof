@@ -111,7 +111,7 @@ module RubyProf
 
     def name(call_info)
       method = call_info.target
-      method.full_name
+      method.full_name rescue 'Unknown'
     end
 
     def link(call_info)
@@ -136,7 +136,7 @@ module RubyProf
     end
 
     def method_href(method)
-      h(method.full_name.gsub(/[><#\.\?=:]/,"_") + "_" + @current_thread_id.to_s)
+      h((method.full_name rescue 'Unknown').gsub(/[><#\.\?=:]/,"_") + "_" + @current_thread_id.to_s)
     end
 
     def total_time(call_infos)
